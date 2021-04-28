@@ -10,4 +10,16 @@ class Park
   def add_trail(trail)
     @trails << trail
   end
+
+  def trails_shorter_than(length)
+    @trails.find_all do |trail|
+      trail.length < length
+    end
+  end
+
+  def hikeable_miles
+    @trails.sum do |trail|
+      trail.length 
+    end
+  end
 end
