@@ -10,34 +10,82 @@ RSpec.describe Hiker do
 
       expect(hiker).to be_a(Hiker)
     end
+
+    it 'has readable attributes' do
+      hiker = Hiker.new('Dora', :moderate)
+
+      expect(hiker.name).to eq('Dora')
+      expect(hiker.experience_level).to eq(:moderate)
+    end
+  end
+
+  context 'snacks are the best' do
+    it 'starts with no snacks' do
+      hiker = Hiker.new('Dora', :moderate)
+
+      expect(hiker.snacks).to eq({})
+    end
+
+    it 'can pack snacks' do
+      hiker = Hiker.new('Dora', :moderate)
+
+      park1 = Park.new('Capitol Reef')
+      park2 = Park.new('Bryce Canyon')
+
+      trail1 = Trail.new({name: 'Grand Wash', length: '2.2 miles', level: :easy})
+      trail2 = Trail.new({name: 'Cohab Canyon', length: '1.7 miles', level: :moderate})
+      trail3 = Trail.new({name: 'Tower Bridge', length: '3.0 miles', level: :moderate})
+
+      park1.add_trail(trail1)
+      park1.add_trail(trail2)
+      park2.add_trail(trail3)
+
+      hiker.pack('water', 1)
+      hiker.pack('trail mix', 3)
+
+      actual = {
+        "water"=>1,
+        "trail mix"=>3
+      }
+
+      expect(hiker.snacks).to eq(actual)
+
+      hiker.pack('water', 1)
+
+      actual = {
+        "water"=>2,
+        "trail mix"=>3
+      }
+
+      expect(hiker.snacks).to eq(actual)
+    end
+  end
+
+  context 'parks' do
+    it 'starts with not parks visited' do
+      hiker = Hiker.new('Dora', :moderate)
+
+      expect(hiker.parks_visited).to eq([])
+    end
+
+    it 'can add parks visited' do
+      hiker = Hiker.new('Dora', :moderate)
+
+      park1 = Park.new('Capitol Reef')
+      park2 = Park.new('Bryce Canyon')
+
+      trail1 = Trail.new({name: 'Grand Wash', length: '2.2 miles', level: :easy})
+      trail2 = Trail.new({name: 'Cohab Canyon', length: '1.7 miles', level: :moderate})
+      trail3 = Trail.new({name: 'Tower Bridge', length: '3.0 miles', level: :moderate})
+
+      park1.add_trail(trail1)
+      park1.add_trail(trail2)
+      park2.add_trail(trail3)
+
+      hiker.visit(park1)
+      hiker.visit(park2)
+
+      expect(hiker.parks_visited).to eq([park1, park2])
+    end
   end
 end
-#
-# trail1 = Trail.new({name: 'Grand Wash', length: '2.2 miles', level: :easy})
-# trail2 = Trail.new({name: 'Cohab Canyon', length: '1.7 miles', level: :moderate})
-# park1 = Park.new('Capitol Reef')
-# park1.name
-# park1.add_trail(trail1)
-# park1.add_trail(trail2)
-# trail3 = Trail.new({name: 'Tower Bridge', length: '3.0 miles', level: :moderate})
-# park2 = Park.new('Bryce Canyon')
-# park2.add_trail(trail3)
-# hiker.name
-# #=> "Dora"
-# hiker.experience_level
-# #=> :moderate
-# hiker.snacks
-# #=> {}
-# hiker.pack('water', 1)
-# hiker.pack('trail mix', 3)
-# hiker.snacks
-# #=> {"water"=>1, "trail mix"=>3}
-# hiker.pack('water', 1)
-# hiker.snacks
-# #=> {"water"=>2, "trail mix"=>3}
-# hiker.parks_visited
-# #=> []
-# hiker.visit(park1)
-# hiker.visit(park2)
-# hiker.parks_visited
-# #=> [#<Park:0x00007fdd66927f48...>, #<Park:0x00007fdd672aa7f0...>]
