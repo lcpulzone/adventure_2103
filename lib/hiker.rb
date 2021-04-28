@@ -19,4 +19,11 @@ class Hiker
     @parks_visited << park
   end
 
+  def possible_trails
+    @parks_visited.flat_map do |park|
+      park.trails.find_all do |trail|
+        trail.level == experience_level
+      end
+    end
+  end
 end
