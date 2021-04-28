@@ -11,8 +11,8 @@ class Hiker
     @parks_visited = []
   end
 
-  def pack(item, amount)
-    @snacks[item] += amount
+  def pack(snack, amount)
+    @snacks[snack] += amount
   end
 
   def visit(park)
@@ -25,5 +25,12 @@ class Hiker
         trail.level == experience_level
       end
     end
+  end
+
+  def favorite_snack
+    fav = @snacks.max_by do |snack, amount|
+      amount
+    end
+    fav[0]
   end
 end
