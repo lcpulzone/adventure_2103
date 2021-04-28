@@ -147,22 +147,3 @@ RSpec.describe Hiker do
     end
   end
 end
-
-
-# park1.add_trail(trail1)
-# park1.add_trail(trail2)
-# park1.add_trail(trail3)
-# park2.add_trail(trail4)
-# park2.add_trail(trail5)
-# park2.add_trail(trail6)
-# park1.trails_by_level
-# #=> {
-# #      :easy => ["Grand Wash"],
-# #      :moderate => ["Cohab Canyon"],
-# #      :strenuous => ["Chimney Rock Loop"]
-# #    }
-# park2.trails_by_level
-# #=> {
-# #      :moderate => ["Queen's/Navajo Loop", "Tower Bridge"],
-# #      :easy => ["Rim Trail"]
-# #    }

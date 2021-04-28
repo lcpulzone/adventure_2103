@@ -19,7 +19,15 @@ class Park
 
   def hikeable_miles
     @trails.sum do |trail|
-      trail.length 
+      trail.length
     end
+  end
+
+  def trails_by_level
+    levels = Hash.new { |hash, key| hash[key] = [] }
+    @trails.each do |trail, level|
+      levels[trail.level] << trail.name
+    end
+    levels
   end
 end
