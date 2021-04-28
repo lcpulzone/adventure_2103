@@ -139,5 +139,62 @@ RSpec.describe Park do
 
       expect(park2.trails_by_level).to eq(actual)
     end
+
+    xit 'can give a collection of a visiters log' do
+      hiker1 = Hiker.new('Dora', :moderate)
+      hiker2 = Hiker.new('Frank', :easy)
+      hiker3 = Hiker.new('Jack', :strenuous)
+      hiker4 = Hiker.new('Sally', :strenuous)
+
+      park = Park.new('Bryce Canyon')
+
+      trail1 = Trail.new({name: 'Rim Trail', length: '11 miles', level: :easy})
+      trail2 = Trail.new({name: "Queen's/Navajo Loop", length: '2.9 miles', level: :moderate})
+      trail3 = Trail.new({name: 'Tower Bridge', length: '3 miles', level: :moderate})
+      trail4 = Trail.new({name: 'Peekaboo Loop', length: '5.5 miles', level: :strenuous})
+
+      park.add_trail(trail1)
+      park.add_trail(trail2)
+      park.add_trail(trail3)
+      park.add_trail(trail4)
+
+      hiker1.visit(park)
+      hiker2.visit(park)
+      hiker3.visit(park)
+      hiker4.visit(park)
+      hiker1.visit(park)
+      hiker2.visit(park)
+      hiker3.visit(park)
+      hiker4.visit(park)
+
+      actual = {
+        1980 => {
+            "06/23" => {
+              hiker1 => [trail2, trail3]
+            },
+            "06/24" => {
+              hiker2 => [trail1],
+              hiker3 => [trail4]
+            },
+            "06/25" => {
+              hiker4 => [trail4]
+            }
+        },
+        2020 => {
+            "06/23" => {
+              hiker1 => [trail2, trail3]
+            },
+            "06/24" => {
+              hiker2 => [trail1],
+              hiker3 => [trail4]
+            },
+            "06/25" => {
+              hiker4 => [trail4]
+            }
+        }
+      }
+
+    expect(park.visitors_log).to eq(actual)
+    end
   end
 end

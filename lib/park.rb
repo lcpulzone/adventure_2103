@@ -30,4 +30,44 @@ class Park
     end
     levels
   end
+
+  def visitors_log
+    log = {
+      1980 => {
+          "06/23" => {
+            hiker => []
+          },
+          "06/24" => {
+            hiker => [],
+            hiker => []
+          },
+          "06/25" => {
+            hiker => []
+          }
+      },
+      2020 => {
+          "06/23" => {
+            hiker => []
+          },
+          "06/24" => {
+            hiker => [],
+            hiker => []
+          },
+          "06/25" => {
+            hiker => []
+          }
+      }
+    }
+    @trails.each do |trail|
+      log[1980]["06/23"][hiker1] << trail.trails_by_level
+      log[1980]["06/24"][hiker2] << trail.trails_by_level
+      log[1980]["06/24"][hiker3] << trail.trails_by_level
+      log[1980]["06/25"][hiker4] << trail.trails_by_level
+      log[2020]["06/23"][hiker1] << trail.trails_by_level
+      log[2020]["06/24"][hiker2] << trail.trails_by_level
+      log[2020]["06/24"][hiker3] << trail.trails_by_level
+      log[2020]["06/25"][hiker4] << trail.trails_by_level
+    end
+    log
+  end
 end
